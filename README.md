@@ -1,54 +1,63 @@
-# React + TypeScript + Vite
+# 📝 Kanban Task Manager - test for RecMan 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful, responsive **Kanban-style task management** application built with **React**, offering advanced task organization and intuitive drag-and-drop functionality.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### ✅ Task Management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ➕ Add new tasks to any column
+- 🗑️ Delete individual tasks
+- ✏️ Edit task titles inline
+- ✅ Mark tasks as complete/incomplete
+- 🔍 Search tasks by name within a column
+- 🗃️ Filter tasks by completion status (`All`, `Completed`, `Incomplete`)
+- 🔀 Reorder tasks within a column using **drag-and-drop**
+- 🔄 Move tasks across columns using **drag-and-drop**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 📁 Column Management
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- ➕ Add new columns
+- 🗑️ Delete columns
+- 🔀 Reorder columns using **drag-and-drop**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🔧 Bulk Actions
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- ☑️ Select individual or all tasks in a column
+- 🧹 Bulk delete selected tasks
+- ✔️ Bulk mark selected tasks as complete
+- ❌ Bulk mark selected tasks as incomplete
+- 🧭 *Move selected tasks to a different column* (coming soon or optional)
+
+### 🧠 UX/UI Enhancements
+
+- 🎯 "Select All" checkbox per column
+- 🎨 Visually distinguish completed vs. incomplete tasks
+- 💾 Tasks and columns are persisted in **localStorage** – your board is saved between sessions
+- 📱 Responsive design — optimized for desktop and mobile use
+- 🧩 Clean and modern UI with **Material UI (MUI)** + **TailwindCSS**
+
+---
+
+## 📦 Tech Stack
+
+- **React**
+- **TypeScript**
+- **TailwindCSS**
+- **MUI (Material UI)**
+- **@dnd-kit** (drag-and-drop)
+- **Zustand** (state management)
+- **localStorage** (data persistence)
+
+---
+
+## 📂 Project Structure
+
+src/
+├── components/ # Reusable UI components (Task, Column, ColumnHeader, etc.)
+├── hooks/ # Custom hooks (e.g. useColumnLogic)
+├── store/ # Zustand state store
+├── utils/ # Utility functions
+└── App.tsx # Application root
