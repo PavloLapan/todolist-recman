@@ -1,5 +1,6 @@
-import { useState, useMemo, KeyboardEvent } from 'react';
+import { useState, useMemo } from 'react';
 import { useTaskStore } from '../store/useTaskStore';
+import type {KeyboardEvent} from 'react'
 
 type CompletionFilter = 'all' | 'completed' | 'incomplete';
 
