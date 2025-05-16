@@ -2,8 +2,8 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 import type {TaskStoreState} from "./useTaskStore.types.ts";
 
-export const useTaskStore = create<TaskStoreState>(
-  persist(
+export const useTaskStore = create<TaskStoreState>()(
+  persist<TaskStoreState>(
     (set) => ({
       columns: {},
       tasks: {},
@@ -77,30 +77,8 @@ export const useTaskStore = create<TaskStoreState>(
           return { columnOrder: newColumnOrder };
         });
       },
-      reorderTasksInColumn: (columnId, activeId, overId) => set(state => {
-        const column = state.columns[columnId];
-        if (!column) return;
-
-        const oldIndex = column.taskIds.indexOf(activeId);
-        const newIndex = column.taskIds.indexOf(overId);
-        if (oldIndex === -1 || newIndex === -1) return;
-
-        const newTaskIds = Array.from(column.taskIds);
-        newTaskIds.splice(oldIndex, 1);
-        newTaskIds.splice(newIndex, 0, activeId);
-
-        return {
-          columns: {
-            ...state.columns,
-            [columnId]: {
-              ...column,
-              taskIds: newTaskIds,
-            },
-          },
-        };
-      }),
       toggleTaskCompletion: (id: string) =>
-        set((state) => {
+        set((state: TaskStoreState) => {
           const task = state.tasks[id];
           if (!task) return {};
 
@@ -117,8 +95,18 @@ export const useTaskStore = create<TaskStoreState>(
       updateTaskTitle: (id: string, newTitle: string) =>
         set((state) => {
           if (state.tasks[id]) {
-            state.tasks[id].title = newTitle;
+            return {
+              ...state,
+              tasks: {
+                ...state.tasks,
+                [id]: {
+                  ...state.tasks[id],
+                  title: newTitle,
+                },
+              },
+            };
           }
+          return {};
         }),
     }),
     {
